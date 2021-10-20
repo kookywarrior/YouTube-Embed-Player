@@ -1,5 +1,4 @@
 function load() {
-    KEY = true;
     var url = document.getElementById("yt_link").value;
     var ID = '';
     url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
