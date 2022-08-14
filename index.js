@@ -1,36 +1,41 @@
-function load() {
-    var url = document.getElementById("yt_link").value;
-    var ID = '';
-    url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-    if(url[2] !== undefined) {
-        ID = url[2].split(/[^0-9a-z_\-]/i);
-        ID = ID[0];
-    }else {
-        ID = url;
-    }
-    clear()
-    const OPEN_LINK = 'https://www.youtube.com/embed/' + String(ID)
-    var iframe = document.createElement('iframe');
-    iframe.style = "overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px;border:none;";
-    iframe.src = OPEN_LINK
-    document.body.appendChild(iframe);
-}
-
-function clear() {
-    document.getElementById('yt_link').remove()
-    document.getElementById('1').remove()
-    document.getElementById('load_button').remove()
-    document.getElementById('2').remove()
-    document.getElementById('3').remove()
-    document.getElementById('4').remove()
-    document.getElementById('5').remove()
-    document.getElementById('6').remove()
-    document.getElementById('7').remove()
-    document.getElementById('8').remove()
-    document.getElementById('9').remove()
-    document.getElementById('10').remove()
-    document.getElementById('11').remove()
-    document.getElementById('12').remove()
-    document.getElementById('13').remove()
-    document.getElementById('Hide-YouTube-Controls-Title-Bar').remove()
+if (window.top.location.search) {
+    const iframe = document.createElement("iframe")
+    iframe.id = "iframe"
+    iframe.src = `https://www.youtube.com/embed/${String(window.top.location.search.substring(1))}`
+    document.body.appendChild(iframe)
+} else {
+    const bg = document.createElement("div")
+    bg.id = "bg"
+    document.body.appendChild(bg)
+    const box = document.createElement("div")
+    box.id = "box"
+    box.innerHTML = `<svg id="play" width="20" height="20" fill="red" viewBox="0 0 16 16"><path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm6.258-6.437a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437z"/></svg><input type="text" id="link" placeholder="Link...">`
+    bg.appendChild(box)
+    window.addEventListener("keydown", evt => {
+        if (!evt) evt = event;
+        if (evt.keyCode === 13) {
+            var url = document.getElementById("link").value;
+            url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            var ID = '';
+            if (url[2] !== undefined) {
+                ID = url[2].split(/[^0-9a-z_\-]/i);
+                ID = ID[0];
+            } else {
+                ID = url;
+            }
+            window.top.location.href += window.top.location.href.includes("?") ? String(ID) : `?${String(ID)}`
+        }
+    })
+    document.getElementById("play").addEventListener("click", () => {
+        var url = document.getElementById("link").value;
+        url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        var ID = '';
+        if (url[2] !== undefined) {
+            ID = url[2].split(/[^0-9a-z_\-]/i);
+            ID = ID[0];
+        } else {
+            ID = url;
+        }
+        window.top.location.href += window.top.location.href.includes("?") ? String(ID) : `?${String(ID)}`
+    })
 }
