@@ -23,7 +23,7 @@ if (window.top.location.search) {
             } else {
                 ID = url;
             }
-            window.top.location.href += window.top.location.href.includes("?") ? String(ID) : `?${String(ID)}`
+            window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(ID)}`
         }
     })
     document.getElementById("play").addEventListener("click", () => {
@@ -36,6 +36,6 @@ if (window.top.location.search) {
         } else {
             ID = url;
         }
-        window.top.location.href += window.top.location.href.includes("?") ? String(ID) : `?${String(ID)}`
+        window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(ID)}`
     })
 }
