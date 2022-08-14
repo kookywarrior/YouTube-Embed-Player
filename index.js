@@ -14,12 +14,10 @@ if (window.top.location.search) {
     window.addEventListener("keydown", evt => {
         if (!evt) evt = event;
         if (evt.keyCode === 13) {
-            const { ID } = getVideoId(document.getElementById("link").value)
-            window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(ID)}`
+            window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(getVideoId(document.getElementById("link").value).id)}`
         }
     })
     document.getElementById("play").addEventListener("click", () => {
-        const { ID } = getVideoId(document.getElementById("link").value)
-        window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(ID)}`
+        window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(getVideoId(document.getElementById("link").value).id)}`
     })
 }
