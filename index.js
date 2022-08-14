@@ -14,28 +14,12 @@ if (window.top.location.search) {
     window.addEventListener("keydown", evt => {
         if (!evt) evt = event;
         if (evt.keyCode === 13) {
-            var url = document.getElementById("link").value;
-            url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-            var ID = '';
-            if (url[2] !== undefined) {
-                ID = url[2].split(/[^0-9a-z_\-]/i);
-                ID = ID[0];
-            } else {
-                ID = url;
-            }
+            const { ID } = getVideoId(document.getElementById("link").value)
             window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(ID)}`
         }
     })
     document.getElementById("play").addEventListener("click", () => {
-        var url = document.getElementById("link").value;
-        url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-        var ID = '';
-        if (url[2] !== undefined) {
-            ID = url[2].split(/[^0-9a-z_\-]/i);
-            ID = ID[0];
-        } else {
-            ID = url;
-        }
+        const { ID } = getVideoId(document.getElementById("link").value)
         window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(ID)}`
     })
 }
