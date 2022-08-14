@@ -15,9 +15,11 @@ if (window.top.location.search) {
         if (!evt) evt = event;
         if (evt.keyCode === 13) {
             window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(getVideoId(document.getElementById("link").value).id)}`
+            document.getElementById("link").value = ""
         }
     })
     document.getElementById("play").addEventListener("click", () => {
         window.top.location.href = `${window.top.location.origin}${window.top.location.pathname}?${String(getVideoId(document.getElementById("link").value).id)}`
+        document.getElementById("link").value = ""
     })
 }
